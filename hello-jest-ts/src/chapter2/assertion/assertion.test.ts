@@ -95,3 +95,11 @@ test('differences between toEqual and toStrictEqual', () => {
 
     expect([, undefined, 1]).not.toStrictEqual([undefined, , 1])
 })
+
+test('"0" should be Truthy', () => {
+    expect('0').toBeTruthy()
+})
+
+test('0 should be Falsy', () => {
+    expect(0).toBeFalsy()
+})

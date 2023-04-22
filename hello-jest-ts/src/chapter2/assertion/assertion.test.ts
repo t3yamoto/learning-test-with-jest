@@ -103,3 +103,66 @@ test('"0" should be Truthy', () => {
 test('0 should be Falsy', () => {
     expect(0).toBeFalsy()
 })
+
+test('should be null', () => {
+    expect(null).toBe(null)
+    expect(null).toBeNull()
+})
+
+test('should be undefined', () => {
+    expect(undefined).toBe(undefined)
+    expect(undefined).toBeUndefined()
+})
+
+test('should be null or undefined', () => {
+    let a // undefined
+    expect(a == null).toBe(true)
+    a = null
+    expect(a == null).toBe(true)
+})
+
+const hoge = () => ({hoge: 'hogehoge', number: 0})
+
+test('hoge return anything', () => {
+    expect(hoge()).toEqual(expect.anything())
+    expect(hoge()).toEqual({
+        hoge: 'hogehoge',
+        number: expect.anything()
+    })
+    expect(hoge()).toEqual({
+        hoge: 'hogehoge',
+        number: expect.any(Number)
+    })
+})
+
+test('0.1 + 0.2 returns 0.3', () => {
+    expect(0.1 + 0.2).toBeCloseTo(0.3)
+})
+
+test('0.301 + and 0.3 are different when numDigits is 3', () => {
+    expect(0.3 + 0.001).not.toBeCloseTo(0.3, 3)
+})
+
+test('0.1 + 0.2 is greater than 0.3', () => {
+    expect(0.1 + 0.2).toBeGreaterThan(0.3)
+    expect(0.1 + 0.2 > 0.3).toBe(true)
+})
+
+test('0.1 + 0.2 is greater than 0.3 or 0.1 + 0.2 equals to 0.30000000000000004', () => {
+    expect(0.1 + 0.2).toBeGreaterThanOrEqual(0.3)
+    expect(0.1 + 0.2).toBeGreaterThanOrEqual(0.30000000000000004)
+    expect(0.1 + 0.2 >= 0.3).toBe(true)
+    expect(0.1 + 0.2 >= 0.30000000000000004).toBe(true)
+})
+
+test('0.1 + 0.2 is less than 0.4', () => {
+    expect(0.1 + 0.2).toBeLessThan(0.4)
+    expect(0.1 + 0.2 < 0.4).toBe(true)
+})
+
+test('0.1 + 0.2 is less than 0.4 or 0.1 + 0.2 equals to 0.30000000000000004', () => {
+    expect(0.1 + 0.2).toBeLessThanOrEqual(0.4)
+    expect(0.1 + 0.2).toBeLessThanOrEqual(0.30000000000000004)
+    expect(0.1 + 0.2 <= 0.4).toBe(true)
+    expect(0.1 + 0.2 <= 0.30000000000000004).toBe(true)
+})

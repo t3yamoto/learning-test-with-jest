@@ -1,3 +1,5 @@
+import { resolve } from "node:path"
+
 test('testを使用してテストケースを作成する', () => {
     const result = true
     const expected = true
@@ -295,4 +297,28 @@ test('return lemon', done => {
         done()
     }
     fetchDataWithCallback(callback)
+})
+
+// 2.3.12 Promise を利用した非同期な関数の結果の評価
+
+const fetchDataWithPromiseResolove = () => 
+    new Promise(resolve => setTimeout(resolve, 1000, 'lemon'))
+
+test('return lemon', () => {
+    return expect(fetchDataWithPromiseResolove()).resolves.toBe('lemon')
+})
+
+test('return lemon with async/await', async () => {
+    await expect(fetchDataWithPromiseResolove()).resolves.toBe('lemon')
+})
+
+const fetchDataWithPromiseReject = () => 
+    new Promise((resolve, reject) => setTimeout(reject, 1000, new Error('lemon does not exist')))
+
+test('failed to return lemon', () => {
+    return expect(fetchDataWithPromiseReject()).rejects.toThrow('lemon does not exist')
+})
+
+test('failed to return with async/await', async () => {
+    await expect(fetchDataWithPromiseReject()).rejects.toThrow('lemon does not exist')
 })

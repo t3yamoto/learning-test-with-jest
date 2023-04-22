@@ -282,3 +282,17 @@ test('throw Error when the length of password is less than 6', () => {
     expect(() => new User({name: 'hoge', password: '12345'})).toThrow(Error)
     expect(() => new User({name: 'hoge', password: '12345'})).toThrow('The password length must be at least 6 characters.')
 })
+
+// 2.3.11 Callback 関数を利用した非同期な関数の結果の評価
+
+const fetchDataWithCallback = callback => {
+    setTimeout(callback, 3000, 'lemon')
+}
+
+test('return lemon', done => {
+    const callback = data => {
+        expect(data).toBe('lemon')
+        done()
+    }
+    fetchDataWithCallback(callback)
+})

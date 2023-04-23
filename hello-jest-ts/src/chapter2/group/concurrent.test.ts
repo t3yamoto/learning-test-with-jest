@@ -13,3 +13,8 @@ test.concurrent.each(
     console.log(n)
     await expect(fetchData()).resolves.toBe(expected)
 })
+
+// 2.4.6 テストをスキップ
+// describe.skip or xdescribe: グループ内のテストケースすべてをスキップ
+// test.skip or xtest: テストケースをスキップ
+// it.skip or xit: テストケースをスキップ
